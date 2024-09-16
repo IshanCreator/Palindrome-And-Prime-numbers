@@ -11,8 +11,64 @@ scvalue.set("")
 def prime():
     primef=Frame(bg="orange")
     primef.place(x=0,width=500,height=500)
+    Label(primef,text="Prime Number",bg="orange",fg="White",font=("comic sana ms",30 )).place(x=130,y=50)
+
+    # ------------------------- Number Entry Place ----------------------
+    
+    
+    def event_for_in(event):
+        if data.get()=="Search Here....":
+            data.delete(0,"end")
+            data.config(bg="white")
+
+    def event_for_out(event):
+        if data.get()=="":
+            data.insert(0,"Search Here....")
+            data.config(bg="yellow")
+
+    data=Entry(primef,bg="yellow",font=("comic sana ms",20),relief=RAISED,borderwidth=5)
+    data.place(x=100,y=150)
+
+    data.insert(0,"Search Here....")
+    data.bind("<FocusIn>",event_for_in)
+    data.bind("<FocusOut>",event_for_out)
+
+    # --------------------------
+
+    # ------------- search button def -----------
 
     
+    
+    def calculate():
+        global scvalue
+        
+        num=int(data.get())
+        i=2
+        count=0
+        while i<=num/2:
+            if num%i==0:
+                count=count+1
+            i+=1
+        if count==0:
+            ans="Prime Number"
+            scvalue.set(ans)
+            scvalue.update
+        else:
+            ans="Not a Prime Number"
+            scvalue.set(ans)
+            scvalue.update
+            
+            
+
+    # -------------- Search Button -------------
+
+    searchb=Button(primef,text="Check",bg="orange red",font=("comic sana ms",20),relief=RAISED,borderwidth=5,command=calculate)
+    searchb.place(x=200,y=250)    
+
+    # -------------- Result Show place ------------
+
+    result=Entry(primef,textvariable=scvalue,bg="yellow",font=("comic sana ms",20),relief=RAISED,borderwidth=5)
+    result.place(x=100,y=350)
 
 
 
